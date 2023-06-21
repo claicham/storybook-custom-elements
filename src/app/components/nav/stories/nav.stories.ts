@@ -1,7 +1,14 @@
 import { moduleMetadata } from '@storybook/angular';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { NavComponent } from '../nav.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+@NgModule({
+  declarations: [NavComponent],
+  exports: [NavComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class WorkaroundModule { }
 
 const meta: Meta<NavComponent> = {
   title: 'Example/Nav',
@@ -9,7 +16,7 @@ const meta: Meta<NavComponent> = {
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      imports: [WorkaroundModule],
     }),
   ],
 };
